@@ -1,5 +1,5 @@
 package lab4.library;
- 
+ //updated
 public class Book {
 	private String title;
 	private boolean isAvailable; 
