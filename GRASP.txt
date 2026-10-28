@@ -1,0 +1,41 @@
+Lab 04: GRASP Principles Design Report
+
+Introduction
+
+This report outlines how the General Responsibility Assignment Software Patterns (GRASP) principles were applied in the refactoring and design of the Library Management System. The goal of this redesign is to transition from a suboptimal single-class structure to a clean, modular object-oriented architecture. 
+
+Application of GRASP Principles
+
+1. Information Expert Principle
+
+Definition: Assign responsibility to the class that has the information necessary to fulfill it.
+
+Application in Our Design: The Book class manages its own internal state, such as tracking whether it is available or borrowed (isAvailable).   The Member class holds and manages its own collection of checked-out books (borrowedBooks).   The Library class acts as the information expert for searching the system records via helper methods like findBookByTitle() and findMemberByName().
+
+
+2. Creator Principle 
+
+Definition: Assign responsibility for creating instances of a class to a class that aggregates, contains, or closely uses the data.
+
+Application in Our Design: The Library class is responsible for managing and instantiating records for books and members.   Methods such as addBook() and addMember() are housed within the Library class to properly encapsulate object creation and collection management.
+
+3. Controller Principle
+
+Definition: Assign responsibility for handling system events or user requests to a non-user interface class that represents the overall system or use case scenario.
+
+Application in Our Design: The LibrarianController class serves as the system controller.   It intercepts user requests coming from the LibraryApp interface (such as borrowing and returning books) and delegates the execution down to the appropriate domain classes (Library, Member, and Book), preventing business logic from clogging the UI layer.
+
+4. Low Coupling Principle
+
+Definition: Evaluate how strongly coupled or dependent classes are on one another, aiming to keep dependencies minimal so that changes in one class do not ripple across others.
+
+Application in Our Design: The main entry-point class (LibraryApp) does not directly manipulate the internal states of Book or Member objects.   Instead, communication flows through well-defined controller and library methods, ensuring that components remain loosely coupled and easy to maintain. 
+
+5. High Cohesion Principle
+
+Definition: Keep classes focused, understandable, and manageable by ensuring each class has a single, well-defined set of closely related responsibilities.
+
+Application in Our Design: Responsibilities are neatly divided across five distinct classes (LibraryApp, LibrarianController, Library, Member, and Book).   This strictly resolves the Single Responsibility Principle violations found in the initial monolithic code version. 
+
+
+
